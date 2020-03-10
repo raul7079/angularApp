@@ -1,0 +1,30 @@
+<div class="container">
+<table>
+  <thead>
+    <th>Numero Pedido</th>
+    <th>Nombre Cliente</th>
+    <th>Productos</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let pedido of productoPedidos">
+    <td>{{ pedido.payload.doc.data().numPedido }}</td>
+    <td>{{ pedido.payload.doc.data().nombreCliente }}</td>
+    <td><span
+      *ngFor="let pedido of pedido.payload.doc.data().producto">
+       {{ pedido }}
+      </span>
+    </td>
+    <td [hidden]="pedido.payload.doc.data().completed"
+        (click)="completado(pedido)">
+      <button>Completar</button>
+    </td>
+
+    <td [hidden]="pedido.payload.doc.data().completed"
+        (click)="borrarPedido(pedido)">
+      <button>Borrar</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+  <button routerLink="/home" class="btn btn-default">Volver</button>
+</div>
