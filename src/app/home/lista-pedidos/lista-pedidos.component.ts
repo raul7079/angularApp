@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PedidosService} from '../../servicio/pedidos.service';
+import {AutentificacionService} from '../../servicio/autentificacion.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-lista-pedidos',
@@ -8,12 +10,15 @@ import {PedidosService} from '../../servicio/pedidos.service';
 })
 export class ListaPedidosComponent implements OnInit {
 
-  constructor(public pedidosService: PedidosService) { }
+  constructor(public pedidosService: PedidosService, public auth: AutentificacionService, private route: Router) { }
 
   productoPedidos;
 
   ngOnInit(): void {
     this.getProductoPedidos();
+    if (this.auth.logeado === false) {
+      this.route.navigate(['login']);
+    }
   }
   getProductoPedidos = () =>
     this.pedidosService

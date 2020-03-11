@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container margentop">
   <form [formGroup]="this.pedidosService.form">
     <input placeholder="Numero Pedido"
            formControlName="numeroPedido"
@@ -8,6 +8,7 @@
            formControlName="nombreCliente"
            type="text"
            class="input-field col s12">
+    <h3><strong>Productos</strong></h3>
     <button class="waves-effect waves-light btn col s4"
             *ngFor="let producto of productos"
             (click)="addProducto(producto)">

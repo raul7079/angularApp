@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
 })
 export class AutentificacionService {
   userData: Observable<firebase.User>;
+  public logeado = false;
   constructor(private angularFireAuth: AngularFireAuth, private router: Router) {
     this.userData = angularFireAuth.authState;
   }
@@ -32,6 +33,7 @@ export class AutentificacionService {
       .then(res => {
         console.log('You are Successfully logged in!');
         this.router.navigate(['home']);
+        this.logeado = true;
       })
       .catch(err => {
         console.log('Something is wrong:', err.message);
@@ -42,5 +44,6 @@ export class AutentificacionService {
     this.angularFireAuth
       .auth
       .signOut();
+    this.logeado = false;
   }
 }
